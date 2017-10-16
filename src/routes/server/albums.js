@@ -1,12 +1,15 @@
-app.get('/albums/:albumID', (req, res) => {
-  const albumID = req.params.albumID
+const express = require('express');
+const router = express.Router();
+const albums = require('../../models/db/albums');
 
-  db.getAlbumsByID(albumID, (error, albums) => {
-    if (error) {
-      res.status(500).render('error', {error})
-    } else {
-      const album = albums[0]
-      res.render('album', {album})
-    }
+router.get('/albums/:albumID', (req, res, next) => {
+  const albumID = request.params.albumID;
+  albums.getByID(albumID)
+  .then(album => {
+    console.log(album);
+    response.render('album', { album });
   })
-})
+  .catch(error => next(error));
+});
+
+module.exports = router;

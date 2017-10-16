@@ -5,14 +5,13 @@ const albumRoutes = require('./albums');
 const userRoutes = require('./users');
 const middlewares = require('../middlewares');
 
-router.get('/', (req, res) => {
-  db.getAlbums((error, albums) => {
-    if (error) {
-      res.status(500).render('error', {error})
-    } else {
-      res.render('index', {albums})
-    }
+router.get('/', (req, res, next) => {
+  albums.getAll()
+  .then(albums => {
+    console.log(albums);
+    // res.render('index', { albums });
   })
+  .catch(error => next(error))
 });
 
 router.use(albumRoutes);

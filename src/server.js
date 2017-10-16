@@ -1,22 +1,22 @@
-const path = require('path')
-const express = require('express')
-const bodyParser = require('body-parser')
-const db = require('./db')
-const routes = require('./routes/server')
+const path = require('path');
+const express = require('express');
+const bodyParser = require('body-parser');
+const db = require('./db');
+const routes = require('./routes/server');
 
-const port = process.env.PORT || 3000
+const port = process.env.PORT || 3000;
 
-const app = express()
+const app = express();
 
-require('ejs')
-app.set('view engine', 'ejs')
-app.set('views', path.join(__dirname, 'views'))
+require('ejs');
+app.set('view engine', 'ejs');
+app.set('views', path.join(__dirname, 'views'));
 
 app.listen(port, () => {
-  console.log(`Listening on http://localhost:${port}...`)
-})
+  console.log(`Listening on http://localhost:${port}...`);
+});
 
-app.use(express.static('public'))
-app.use(bodyParser.urlencoded({extended: false}))
+app.use(express.static('public'));
+app.use(bodyParser.urlencoded({extended: false}));
 
 app.use(routes);
