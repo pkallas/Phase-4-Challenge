@@ -1,29 +1,14 @@
 const db = require('./db');
 
-function getAlbums(cb) {
-  _query('SELECT * FROM albums', [], cb)
-}
+const getAll = () => {
+  return db.query(`SELECT * FROM albums`);
+};
 
-function getAlbumsByID(albumID, cb) {
-  _query('SELECT * FROM albums WHERE id = $1', [albumID], cb)
-}
-
-function _query(sql, variables, cb) {
-  console.log('QUERY ->', sql.replace(/[\n\s]+/g, ' '), variables)
-
-  client.query(sql, variables, (error, result) => {
-    if (error) {
-      console.log('QUERY -> !!ERROR!!')
-      console.error(error)
-      cb(error)
-    } else {
-      console.log('QUERY ->', JSON.stringify(result.rows))
-      cb(error, result.rows)
-    }
-  })
-}
+const getByID = (albumID) => {
+  return db.query(`SELECT * FROM albums WHERE id = $1`, [albumID]);
+};
 
 module.exports = {
-  getAlbums,
-  getAlbumsByID,
-}
+  getAll,
+  getByID,
+};
