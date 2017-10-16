@@ -27,8 +27,15 @@ const getAllForOneUser = (userID) => {
   .catch(error => { throw error });
 };
 
+const create = (userID, albumID, description) => {
+  return db.query(`INSERT INTO reviews (user_id, album_id, date_written, description)
+  VALUES ($1, $2, current_timestamp, $3)`, [userID, albumID, description])
+  .catch(error => { throw error });
+};
+
 module.exports = {
   getThreeMostRecent,
   getAllForOneAlbum,
   getAllForOneUser,
+  create,
 };
