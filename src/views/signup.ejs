@@ -1,0 +1,13 @@
+<%- include ./header.ejs %>
+
+  <div class="sign-up-page-container">
+    <h1>Sign Up For Vinyl</h1>
+    <form action="/signup" method="POST">
+      Name: <input type="text" name="name">
+      Email: <input type="email" name="email">
+      Password: <input type="password" name="password">
+      <input type="Submit" value="Sign Up">
+    </form>
+  </div>
+
+<%- include ./footer.ejs %>
