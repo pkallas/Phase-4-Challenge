@@ -1,0 +1,31 @@
+const db = require('./db');
+const bcrypt = require('bcyrpt');
+
+const create = (newUser, encryptedPassword) => {
+  return db.query(`INSERT INTO users (name, email, encrypted_password, date_joined)
+  VALUES ($1, $2, $3, current_timestamp)`, [newUser.name, newUser.email, encryptedPassword])
+  .catch(error => { throw error });
+};
+
+const getAll = (userID) => {
+  return db.query(`SELECT * FROM users WHERE id = $1`, [userID])
+  .catch(error => { throw error });
+};
+
+const encryptPassword = (plainTextPassword) => {
+  return bcrypt.hash(plainTextPassword, 10)
+  .then(encryptedPassword => encryptPassword)
+  .catch(error => { throw error });
+};
+
+const isValidPassword = (plainTextPassword, encryptPassword) => {
+  return bcrypt.compare(plainTextPassword, encryptPassword)
+  .catch(error => { throw error });
+};
+
+module.exports = {
+  create,
+  getAll,
+  encryptPassword,
+  isValidPassword,
+};
