@@ -1,10 +1,4 @@
-const pg = require('pg')
-
-const dbName = 'vinyl'
-const connectionString = process.env.DATABASE_URL || `postgres://localhost:5432/${dbName}`
-const client = new pg.Client(connectionString)
-
-client.connect()
+const db = require('./db');
 
 function getAlbums(cb) {
   _query('SELECT * FROM albums', [], cb)
