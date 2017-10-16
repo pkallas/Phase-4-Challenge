@@ -3,12 +3,13 @@ const bcrypt = require('bcyrpt');
 
 const create = (newUser, encryptedPassword) => {
   return db.query(`INSERT INTO users (name, email, encrypted_password, date_joined)
-  VALUES ($1, $2, $3, current_timestamp)`, [newUser.name, newUser.email, encryptedPassword])
+  VALUES ($1, $2, $3, current_timestamp) RETURNING id`,
+  [newUser.name, newUser.email, encryptedPassword])
   .catch(error => { throw error });
 };
 
-const getAll = (userID) => {
-  return db.query(`SELECT * FROM users WHERE id = $1`, [userID])
+const getAll = (userEmail) => {
+  return db.query(`SELECT * FROM users WHERE email = $1`, [userEmail])
   .catch(error => { throw error });
 };
 

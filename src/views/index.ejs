@@ -8,6 +8,20 @@
 <body>
 
   <h1>Vinyl</h1>
+  <div class="nav-links">
+    <span class="nav-links-left">
+      <a href="/">Home</a>
+    </span>
+  <% if (session) { %>
+    <span class="nav-links-right">
+      <a href="/users/<%=userID%>">Profile</a>
+      <a href="/signout">Sign Out</a>
+  <% } else { %>
+      <a href="signup">Sign Up</a>
+      <a href="signin">Sign In</a>
+  <% } %>
+    </span>
+  </div>
 
   <h2>Records</h2>
 
