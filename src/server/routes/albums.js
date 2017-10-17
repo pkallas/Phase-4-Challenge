@@ -1,12 +1,20 @@
 const express = require('express');
 const router = express.Router();
 const albums = require('../../models/db/albums');
+const reviews = require('../../models/db/reviews');
 
 router.get('/albums/:albumID', (req, res, next) => {
   const albumID = req.params.albumID;
   albums.getByID(albumID)
   .then(album => {
-    res.render('album', { album });
+    reviews.getAllForOneAlbum(albumID)
+    .then(reviews => {
+      if (reviews.length > 0) {
+        res.render('album', { album, reviews });
+      } else {
+        res.render('album', { album });
+      }
+    });
   })
   .catch(error => next(error));
 });
