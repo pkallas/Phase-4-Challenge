@@ -38,11 +38,25 @@ router.post('/signup', (req, res, next) => {
     email: req.body.email,
   };
   const plainTextPassword = req.body.password;
-  users.encryptPassword(plainTextPassword)
-  .then(encryptedPassword => users.create(user, encryptedPassword))
-  .then(newUserId => {
-    req.session.userID = newUserId;
-    res.redirect(`/users/${newUserID}`);
+  users.isUser(user.email)
+  .then(exisitingUser => {
+    if (exisitingUser.length > 0) {
+      let message = {
+        text: 'User already exists, please try a different username or go to login',
+      };
+      res.render('signup', { message });
+    } else {
+      users.encryptPassword(plainTextPassword)
+      .then(encryptedPassword => {
+        users.create(user, encryptedPassword)
+        .then(newUserId => {
+          req.session.userID = newUserId;
+          res.redirect(`/users/${newUserID}`);
+        })
+        .catch(error => next(error));
+      })
+      .catch(error => next(error));
+    }
   })
   .catch(error => next(error));
 });

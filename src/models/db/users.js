@@ -15,7 +15,7 @@ const getAllByEmail = (userEmail) => {
 
 const encryptPassword = (plainTextPassword) => {
   return bcrypt.hash(plainTextPassword, 10)
-  .then(encryptedPassword => encryptPassword)
+  .then(encryptedPassword => encryptedPassword)
   .catch(error => { throw error });
 };
 
@@ -30,10 +30,16 @@ const getAllByID = (userID) => {
   .catch(error => { throw error });
 };
 
+const isUser = (email) => {
+  return db.query(`SELECT * FROM users WHERE email = $1`, [email])
+  .catch(error => { throw error });
+};
+
 module.exports = {
   create,
   getAllByEmail,
   encryptPassword,
   isValidPassword,
   getAllByID,
+  isUser,
 };
