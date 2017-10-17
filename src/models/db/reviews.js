@@ -42,7 +42,7 @@ const setAuthorFalse = () => {
   return db.query(`UPDATE reviews set is_author = false`);
 };
 
-const delete = (reviewID) => {
+const deleteByID = (reviewID) => {
   return db.query(`DELETE FROM reviews WHERE id = $1`, [reviewID]);
 };
 
