@@ -4,6 +4,7 @@ const bodyParser = require('body-parser');
 const routes = require('./server/routes');
 const session = require('express-session');
 const middlewares = require('./server/middlewares');
+require('dotenv').config();
 
 const port = process.env.PORT || 3000;
 

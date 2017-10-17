@@ -8,7 +8,7 @@ const create = (user, encryptedPassword) => {
   .catch(error => { throw error });
 };
 
-const getAll = (userEmail) => {
+const getAllByEmail = (userEmail) => {
   return db.query(`SELECT * FROM users WHERE email = $1`, [userEmail])
   .catch(error => { throw error });
 };
@@ -24,9 +24,16 @@ const isValidPassword = (plainTextPassword, encryptPassword) => {
   .catch(error => { throw error });
 };
 
+const getAllByID = (userID) => {
+  return db.query(`SELECT * FROM users WHERE id = $1`, [userID])
+  .then(user => user[0])
+  .catch(error => { throw error });
+};
+
 module.exports = {
   create,
-  getAll,
+  getAllByEmail,
   encryptPassword,
   isValidPassword,
+  getAllByID,
 };
