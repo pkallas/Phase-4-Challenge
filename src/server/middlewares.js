@@ -1,7 +1,7 @@
 const setDefaultResponseLocals = (request, response, next) => {
   response.locals.reviews = undefined;
   response.locals.reviewAuthor = undefined;
-  if (request.session.userID) {
+  if (request.session) {
     response.locals.session = true;
     response.locals.userID = request.session.userID;
     next();

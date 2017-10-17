@@ -9,10 +9,8 @@ const middlewares = require('../middlewares');
 router.get('/', (req, res, next) => {
   albums.getAll()
   .then(albums => {
-    console.log('albums --->', albums);
     reviews.getThreeMostRecent()
     .then(reviews => {
-      console.log('reviews --->', reviews);
       if (reviews.length > 0) {
         res.render('index', { albums, reviews });
       } else {
