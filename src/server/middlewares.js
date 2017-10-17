@@ -1,20 +1,20 @@
-const setDefaultResponseLocals = (request, response, next) => {
-  response.locals.reviews = undefined;
-  response.locals.reviewAuthor = undefined;
-  if (request.session) {
-    response.locals.session = true;
-    response.locals.userID = request.session.userID;
+const setDefaultResponseLocals = (req, res, next) => {
+  res.locals.reviews = undefined;
+  res.locals.reviewAuthor = undefined;
+  if (req.session) {
+    res.locals.session = true;
+    res.locals.userID = req.session.userID;
     next();
   } else {
-    response.locals.session = false;
-    response.locals.userID = undefined;
+    res.locals.session = false;
+    res.locals.userID = undefined;
     next();
   };
 };
 
-const errorHandler = (error, request, response, next) => {
+const errorHandler = (error, req, res, next) => {
   console.error(error);
-  response.status(500).render('error');
+  res.status(500).render('error');
 };
 
 const notFound = (req, res) => {

@@ -1,10 +1,10 @@
 const db = require('./db');
 const bcrypt = require('bcrypt');
 
-const create = (newUser, encryptedPassword) => {
+const create = (user, encryptedPassword) => {
   return db.query(`INSERT INTO users (name, email, encrypted_password, date_joined)
   VALUES ($1, $2, $3, current_timestamp) RETURNING id`,
-  [newUser.name, newUser.email, encryptedPassword])
+  [user.name, user.email, encryptedPassword])
   .catch(error => { throw error });
 };
 
