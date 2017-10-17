@@ -2,7 +2,8 @@ const path = require('path');
 const express = require('express');
 const bodyParser = require('body-parser');
 const db = require('./db');
-const routes = require('./routes/server');
+const routes = require('./server/routes');
+const middlewares = require('./server/middlewares');
 
 const port = process.env.PORT || 3000;
 
@@ -18,5 +19,7 @@ app.listen(port, () => {
 
 app.use(express.static('public'));
 app.use(bodyParser.urlencoded({extended: false}));
+
+app.use(middlewares.setDefaultResponseLocals);
 
 app.use(routes);

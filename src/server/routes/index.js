@@ -9,7 +9,7 @@ router.get('/', (req, res, next) => {
   albums.getAll()
   .then(albums => {
     console.log(albums);
-    // res.render('index', { albums });
+    res.render('index', { albums });
   })
   .catch(error => next(error))
 });
