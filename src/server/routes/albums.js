@@ -20,16 +20,32 @@ router.get('/albums/:albumID', (req, res, next) => {
 });
 
 router.get('/albums/:albumID/reviews/new', (req, res, next) => {
-  const albumID = req.params.albumID;
-  albums.getByID(albumID)
-  .then(album => {
-    if (album) {
-      res.render('review', { album });
-    } else {
-      res.redirect('/');
-    }
-  })
-  .catch(error => next(error));
+  if (req.session) {
+    const albumID = req.params.albumID;
+    albums.getByID(albumID)
+    .then(album => {
+      if (album) {
+        res.render('review', { album });
+      } else {
+        res.redirect('/');
+      }
+    })
+    .catch(error => next(error));
+  } else {
+    res.redirect('/');
+  }
+});
+
+router.post('/albums/:albumID/reviews', (req, res, next) => {
+  if (req.session) {
+    const albumID = req.params.albumID;
+    const userID = req.session.userID;
+    reviews.create(userID, albumID, req.body.reviewDescription)
+    .then(newReview => res.redirect(`/albums/${albumID}`))
+    .catch(error => next(error));
+  } else {
+    res.redirect('/');
+  }
 });
 
 module.exports = router;
