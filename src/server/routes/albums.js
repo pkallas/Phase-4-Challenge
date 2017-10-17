@@ -20,10 +20,10 @@ router.get('/albums/:albumID', (req, res, next) => {
 });
 
 router.get('/albums/:albumID/reviews/new', (req, res, next) => {
-  const albumID = request.params.albumID;
+  const albumID = req.params.albumID;
   albums.getByID(albumID)
   .then(album => {
-    if (album.length > 0) {
+    if (album) {
       res.render('review', { album });
     } else {
       res.redirect('/');
