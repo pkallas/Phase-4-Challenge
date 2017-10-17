@@ -17,6 +17,9 @@
           <span><%= review.description %></span>
           <span>by <a href="/users/<% review.user_id %>"><%= review.name %></a></span>
         </div>
+        <% if (reviewAuthor) { %>
+          <span>&#xe020</span>
+        <% } %>
       <% }) %>
     <% } %>
   </div>
