@@ -6,9 +6,26 @@ router.get('/signin', (req, res) => {
   res.render('signin');
 });
 
-// router.post('/signin', (req, res, next) => {
-//
-// });
+router.post('/signin', (req, res, next) => {
+  const userEmail = req.body.email;
+  const plainTextPassword = req.body.password;
+  users.getAll(userEmail)
+  .then(user => {
+    return isValidPassword(plainTextPassword, user.encrypted_password)
+    .then(isValid => {
+      if (isValid) {
+        req.session.userID = user.id;
+        res.redirect(`users/${user.id}`);
+      } else {
+        const message = {
+          text: 'Wrong email or password, try again',
+        };
+        res.render('/signin', { message });
+      }
+    });
+  })
+  .catch(error => next(error));
+});
 
 router.get('/signup', (req, res) => {
   res.render('signup');

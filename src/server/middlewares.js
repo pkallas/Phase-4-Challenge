@@ -1,6 +1,7 @@
 const setDefaultResponseLocals = (req, res, next) => {
   res.locals.reviews = undefined;
   res.locals.reviewAuthor = undefined;
+  res.locals.message = undefined;
   if (req.session) {
     res.locals.session = true;
     res.locals.userID = req.session.userID;
