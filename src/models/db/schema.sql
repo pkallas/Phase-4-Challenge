@@ -21,5 +21,6 @@ CREATE TABLE reviews (
   user_id INTEGER REFERENCES users (id) ON DELETE CASCADE,
   album_id INTEGER REFERENCES albums (id) ON DELETE CASCADE,
   date_written TIMESTAMP,
-  description TEXT
+  description TEXT,
+  is_author BOOLEAN DEFAULT false
 );

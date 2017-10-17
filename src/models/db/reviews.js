@@ -33,9 +33,20 @@ const create = (userID, albumID, description) => {
   .catch(error => { throw error });
 };
 
+const setAuthorTrue = (userID, albumID) => {
+  return db.query(`UPDATE reviews SET is_author = true
+  WHERE reviews.user_id = $1 AND reviews.album_id = $2`, [userID, albumID]);
+};
+
+const setAuthorFalse = () => {
+  return db.query(`UPDATE reviews set is_author = false`);
+}
+
 module.exports = {
   getThreeMostRecent,
   getAllForOneAlbum,
   getAllForOneUser,
   create,
+  setAuthorTrue,
+  setAuthorFalse,
 };

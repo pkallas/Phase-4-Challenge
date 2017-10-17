@@ -1,3 +1,5 @@
+const reviews = require('../models/db/reviews');
+
 const setDefaultResponseLocals = (req, res, next) => {
   res.locals.reviews = undefined;
   res.locals.reviewAuthor = undefined;
@@ -5,11 +7,13 @@ const setDefaultResponseLocals = (req, res, next) => {
   if (req.session.userID) {
     res.locals.session = true;
     res.locals.userID = req.session.userID;
-    next();
+    reviews.setAuthorFalse()
+    .then(() => next());
   } else {
     res.locals.session = false;
     res.locals.userID = undefined;
-    next();
+    reviews.setAuthorFalse()
+    .then(() => next());
   };
 };
 
