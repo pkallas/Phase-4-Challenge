@@ -1,5 +1,5 @@
 const db = require('./db');
-const bcrypt = require('bcyrpt');
+const bcrypt = require('bcrypt');
 
 const create = (newUser, encryptedPassword) => {
   return db.query(`INSERT INTO users (name, email, encrypted_password, date_joined)
