@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const albums = require('../../models/db/albums');
+const reviews = require('../../models/db/reviews');
 const albumRoutes = require('./albums');
 const userRoutes = require('./users');
 const middlewares = require('../middlewares');
@@ -8,10 +9,18 @@ const middlewares = require('../middlewares');
 router.get('/', (req, res, next) => {
   albums.getAll()
   .then(albums => {
-    console.log(albums);
-    res.render('index', { albums });
+    console.log('albums --->', albums);
+    reviews.getThreeMostRecent()
+    .then(reviews => {
+      console.log('reviews --->', reviews);
+      if (reviews.length > 0) {
+        res.render('index', { albums, reviews });
+      } else {
+        res.render('index', { albums });
+      }
+    });
   })
-  .catch(error => next(error))
+  .catch(error => next(error));
 });
 
 router.use(albumRoutes);
