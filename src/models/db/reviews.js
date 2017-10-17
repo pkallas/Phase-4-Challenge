@@ -40,7 +40,11 @@ const setAuthorTrue = (userID, albumID) => {
 
 const setAuthorFalse = () => {
   return db.query(`UPDATE reviews set is_author = false`);
-}
+};
+
+const delete = (reviewID) => {
+  return db.query(`DELETE FROM reviews WHERE id = $1`, [reviewID]);
+};
 
 module.exports = {
   getThreeMostRecent,
