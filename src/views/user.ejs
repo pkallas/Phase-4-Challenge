@@ -33,7 +33,7 @@
             <span><%= review.description %></span>
             <span>by <a href="/users/<% review.user_id %>"><%= review.name %></a></span>
             <% if (reviewAuthor) { %>
-              <i class="fa fa-trash" id="review.id"></i>
+              <i class="fa fa-trash" id="<%= review.id %>"></i>
             <% } %>
           </div>
         <% }) %>
