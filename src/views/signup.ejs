@@ -1,10 +1,12 @@
 <%- include ./header.ejs %>
 
-  <div class="sign-up-page-container">
+  <div class="sign-up-page-header-container">
     <h1>Sign Up For Vinyl</h1>
     <% if (message) { %>
       <div><%= message.text %></div>
     <% } %>
+  </div>
+  <div class="sign-up-page-form-container">
     <form action="/signup" method="POST">
       Name: <input type="text" name="name">
       Email: <input type="email" name="email">
