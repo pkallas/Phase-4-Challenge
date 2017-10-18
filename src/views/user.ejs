@@ -2,11 +2,11 @@
 
   <div class="user-page-container">
 
-    <div class="user-image">
+    <div class="user-image-container">
       <% if (user.profile_pic) { %>
-        <img src="<%= user.profile_pic %>" alt="No Image Available">
+        <img class="user-image" src="<%= user.profile_pic %>" alt="No Image Available">
       <% } else { %>
-        <img src="https://www.vccircle.com/wp-content/uploads/2017/03/default-profile.png">
+        <img class="user-image" src="https://www.vccircle.com/wp-content/uploads/2017/03/default-profile.png">
       <% } %>
     </div>
     <button class="edit-profile-button" type="button">Edit Profile Picture</button>
