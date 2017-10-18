@@ -2,16 +2,17 @@
 
   <div class="user-page-container">
 
-    <div class="user-image">
+    <div class="user-image-container">
       <% if (user.profile_pic) { %>
-        <img src="<%= user.profile_pic %>" alt="No Image Available">
+        <img class="user-image" src="<%= user.profile_pic %>" alt="No Image Available">
       <% } else { %>
-        <img src="https://www.vccircle.com/wp-content/uploads/2017/03/default-profile.png">
+        <img class="user-image" src="https://www.vccircle.com/wp-content/uploads/2017/03/default-profile.png">
       <% } %>
     </div>
+    <button class="edit-profile-button" type="button">Edit Profile Picture</button>
 
-    <div class="user-page-header">
-      <div><%= user.name %></div>
+    <div class="user-page-header-container">
+      <div class="user-name-header"><%= user.name %></div>
       <div class="user-page-header-item">
         <span class="user-page-header-item-left">Email</span>
         <span class="user-page-header-item-right"><%= user.email %></span>
@@ -31,12 +32,14 @@
             <span><%= review.date_written %></span>
             <span><%= review.description %></span>
             <span>by <a href="/users/<% review.user_id %>"><%= review.name %></a></span>
+            <% if (reviewAuthor) { %>
+              <i class="fa fa-trash" id="review.id"></i>
+            <% } %>
           </div>
-          <% if (reviewAuthor) { %>
-            <i class="fa fa-trash" id="review.id"></i>
-          <% } %>
         <% }) %>
       <% } %>
     </div>
+
+<%- include ./modal.ejs %>
 
 <%- include ./footer.ejs %>

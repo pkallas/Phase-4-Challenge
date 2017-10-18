@@ -3,3 +3,93 @@ html, body {
   padding: 0;
   width: 100vw;
 }
+
+.modal-overlay {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  z-index: 50;
+  background: rgba(0, 0, 0, 0.6);
+}
+
+.modal {
+  display: none;
+  width: 400px;
+  max-width: 100%;
+  height: 100px;
+  max-height: 100%;
+  position: fixed;
+  z-index: 100;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: white;
+}
+
+.delete-button {
+  position: absolute;
+  right: 5px;
+}
+
+.cancel-button {
+  position: absolute;
+  left: 5px;
+}
+
+.modal-guts {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  text-align: center;
+}
+
+.home-page-image-container {
+  display: flex;
+  justify-content: center;
+}
+
+.home-page-image {
+  height: 600px;
+  width: auto;
+}
+
+.home-page-container {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+}
+
+.review-list-container {
+  display: flex;
+  justify-content: center;
+  position: relative;
+  bottom: 325px;
+}
+
+.sign-up-page-header-container {
+  display: flex;
+  justify-content: center;
+}
+
+.sign-up-page-form-container {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.sign-in-page-header-container {
+  display: flex;
+  justify-content: center;
+}
+
+.sign-in-page-form-container {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+}
