@@ -12,7 +12,7 @@ router.post('/signin', (req, res, next) => {
   const plainTextPassword = req.body.password;
   users.getAllByEmail(userEmail)
   .then(user => {
-    return isValidPassword(plainTextPassword, user.encrypted_password)
+    return users.isValidPassword(plainTextPassword, user.encrypted_password)
     .then(isValid => {
       if (isValid) {
         req.session.userID = user.id;
@@ -21,7 +21,7 @@ router.post('/signin', (req, res, next) => {
         const message = {
           text: 'Wrong email or password, try again',
         };
-        res.render('/signin', { message });
+        res.render('signin', { message });
       }
     });
   })
@@ -49,9 +49,9 @@ router.post('/signup', (req, res, next) => {
       users.encryptPassword(plainTextPassword)
       .then(encryptedPassword => {
         users.create(user, encryptedPassword)
-        .then(newUserId => {
-          req.session.userID = newUserId;
-          res.redirect(`/users/${newUserID}`);
+        .then(newUserID => {
+          req.session.userID = newUserID[0].id;
+          res.redirect(`/users/${newUserID[0].id}`);
         })
         .catch(error => next(error));
       })
@@ -64,7 +64,7 @@ router.post('/signup', (req, res, next) => {
 router.get('/users/:userID', (req, res, next) => {
   const userID = req.params.userID;
   let reviewAuthor;
-  userID === req.session.userID ? reviewAuthor = true : reviewAuthor = false;
+  userID == req.session.userID ? reviewAuthor = true : reviewAuthor = false;
   users.getAllByID(userID)
   .then(user => {
     reviews.getAllForOneUser(userID)

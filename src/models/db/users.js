@@ -10,6 +10,7 @@ const create = (user, encryptedPassword) => {
 
 const getAllByEmail = (userEmail) => {
   return db.query(`SELECT * FROM users WHERE email = $1`, [userEmail])
+  .then(user => user[0])
   .catch(error => { throw error });
 };
 

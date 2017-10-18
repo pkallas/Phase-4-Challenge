@@ -3,7 +3,11 @@
   <div class="user-page-container">
 
     <div class="user-image">
-      <img src="<%= profile_pic %>" alt="https://support.plymouth.edu/kb_images/Yammer/default.jpeg">
+      <% if (user.profile_pic) { %>
+        <img src="<%= user.profile_pic %>" alt="No Image Available">
+      <% } else { %>
+        <img src="https://www.vccircle.com/wp-content/uploads/2017/03/default-profile.png">
+      <% } %>
     </div>
 
     <div class="user-page-header">
@@ -29,7 +33,7 @@
             <span>by <a href="/users/<% review.user_id %>"><%= review.name %></a></span>
           </div>
           <% if (reviewAuthor) { %>
-            <span class="delete-view-icon" id="review.id">&#xe020</span>
+            <i class="fa fa-trash" id="review.id"></i>
           <% } %>
         <% }) %>
       <% } %>

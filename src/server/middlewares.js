@@ -2,6 +2,7 @@ const reviews = require('../models/db/reviews');
 
 const setDefaultResponseLocals = (req, res, next) => {
   res.locals.reviews = undefined;
+  res.locals.allReviews = undefined;
   res.locals.reviewAuthor = undefined;
   res.locals.message = undefined;
   if (req.session.userID) {

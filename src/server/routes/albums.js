@@ -9,16 +9,16 @@ router.get('/albums/:albumID', (req, res, next) => {
   albums.getByID(albumID)
   .then(album => {
     reviews.getAllForOneAlbum(albumID)
-    .then(reviews => {
-      if (reviews.length > 0) {
+    .then(allReviews => {
+      if (allReviews.length > 0) {
         if (userID) {
-          reviews.forEach(review => {
+          allReviews.forEach(review => {
             if (review.user_id === userID) {
               reviews.setAuthorTrue(userID, albumID)
               .then(() => console.log('review updated'));
             }
           });
-          res.render('album', { album, reviews });
+          res.render('album', { album, allReviews });
         }
       } else {
         res.render('album', { album });
@@ -46,7 +46,7 @@ router.get('/albums/:albumID/reviews/new', (req, res, next) => {
 });
 
 router.post('/albums/:albumID/reviews', (req, res, next) => {
-  if (req.session) {
+  if (req.session.userID) {
     const albumID = req.params.albumID;
     const userID = req.session.userID;
     reviews.create(userID, albumID, req.body.reviewDescription)

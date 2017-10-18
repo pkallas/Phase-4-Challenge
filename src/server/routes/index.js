@@ -9,6 +9,7 @@ const middlewares = require('../middlewares');
 router.get('/', (req, res, next) => {
   albums.getAll()
   .then(albums => {
+    console.log(albums);
     reviews.getThreeMostRecent()
     .then(reviews => {
       if (reviews.length > 0) {

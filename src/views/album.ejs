@@ -9,16 +9,16 @@
   </div>
 
   <div class="album-page-column">
-    <% if (reviews) { %>
-      <% reviews.forEach(function(review) { %>
+    <% if (allReviews) { %>
+      <% allReviews.forEach(function(review) { %>
         <div>
           <h5><a href="/albums/<%= review.album_id %>"><%= review.title %></a></h5>
           <span><%= review.date_written %></span>
           <span><%= review.description %></span>
-          <span>by <a href="/users/<% review.user_id %>"><%= review.name %></a></span>
+          <span>by <a href="/users/<%= review.user_id %>"><%= review.name %></a></span>
         </div>
         <% if (review.is_author === true) { %>
-          <span class="delete-view-icon" id="review.id">&#xe020</span>
+          <i class="fa fa-trash" id="review.id"></i>
         <% } %>
       <% }) %>
     <% } %>
