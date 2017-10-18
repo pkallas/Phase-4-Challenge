@@ -36,6 +36,12 @@ const isUser = (email) => {
   .catch(error => { throw error });
 };
 
+const updateProfilePicture = (userID, profilePic) => {
+  return db.query(`UPDATE users SET profile_pic = $2
+  WHERE id = $1`, [userID, profilePic])
+  .catch(error => { throw error });
+};
+
 module.exports = {
   create,
   getAllByEmail,
@@ -43,4 +49,5 @@ module.exports = {
   isValidPassword,
   getAllByID,
   isUser,
+  updateProfilePicture,
 };

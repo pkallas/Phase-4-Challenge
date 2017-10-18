@@ -79,6 +79,14 @@ router.get('/users/:userID', (req, res, next) => {
   .catch(error => next(error));
 });
 
+router.put('/users/:userID', (req, res, next) => {
+  const userID = req.params.userID;
+  const profilePic = req.body.profilePic;
+  users.updateProfilePicture(userID, profilePic)
+  .then(() => res.json('Profile Picture Updated'))
+  .catch(error => next(error));
+});
+
 router.get('/signout', (req, res) => {
   req.session.destroy();
   res.redirect('/');
