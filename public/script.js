@@ -3,7 +3,7 @@ console.log('hello from the browser JavaScript')
 document.addEventListener('DOMContentLoaded', function () {
   const elements = {
     trashIcon: function () {
-      return document.querySelectorAll('.fa fa-trash')
+      return document.querySelectorAll('.fa.fa-trash');
     },
     editProfileButton: function () {
       return document.querySelector('.edit-profile-button');
@@ -89,8 +89,8 @@ document.addEventListener('DOMContentLoaded', function () {
       let newButton = document.createElement('BUTTON');
       newButton.classList.add('submit-profile-form');
       newButton.innerText = 'Submit';
-      elements.userImageContainer.appendChild(newInput);
-      elements.userImageContainer.appendChild(newButton);
+      elements.userImageContainer().appendChild(newInput);
+      elements.userImageContainer().appendChild(newButton);
     },
     removeInput: function () {
       elements.profilePicInput.display = 'none';
