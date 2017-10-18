@@ -2,6 +2,9 @@
 
   <div class="sign-up-page-container">
     <h1>Sign Up For Vinyl</h1>
+    <% if (message) { %>
+      <div><%= message.text %></div>
+    <% } %>
     <form action="/signup" method="POST">
       Name: <input type="text" name="name">
       Email: <input type="email" name="email">

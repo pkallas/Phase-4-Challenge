@@ -3,18 +3,22 @@
   <div class="user-page-container">
 
     <div class="user-image">
-      <img src="<%= profile_pic %>" alt="https://support.plymouth.edu/kb_images/Yammer/default.jpeg">
+      <% if (user.profile_pic) { %>
+        <img src="<%= user.profile_pic %>" alt="No Image Available">
+      <% } else { %>
+        <img src="https://www.vccircle.com/wp-content/uploads/2017/03/default-profile.png">
+      <% } %>
     </div>
 
     <div class="user-page-header">
-      <div><%= name %></div>
+      <div><%= user.name %></div>
       <div class="user-page-header-item">
         <span class="user-page-header-item-left">Email</span>
-        <span class="user-page-header-item-right"><%= email %></span>
+        <span class="user-page-header-item-right"><%= user.email %></span>
       </div>
       <div class="user-page-header-item">
         <span class="user-page-header-item-left">Date Joined</span>
-        <span class="user-page-header-item-right"><%= date_joined %></span>
+        <span class="user-page-header-item-right"><%= user.date_joined %></span>
       </div>
     </div>
 
@@ -29,7 +33,7 @@
             <span>by <a href="/users/<% review.user_id %>"><%= review.name %></a></span>
           </div>
           <% if (reviewAuthor) { %>
-            <span>&#xe020</span>
+            <i class="fa fa-trash" id="review.id"></i>
           <% } %>
         <% }) %>
       <% } %>

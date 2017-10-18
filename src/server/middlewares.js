@@ -1,20 +1,26 @@
-const setDefaultResponseLocals = (request, response, next) => {
-  response.locals.reviews = undefined;
-  response.locals.reviewAuthor = undefined;
-  if (request.session.userID) {
-    response.locals.session = true;
-    response.locals.userID = request.session.userID;
-    next();
+const reviews = require('../models/db/reviews');
+
+const setDefaultResponseLocals = (req, res, next) => {
+  res.locals.reviews = undefined;
+  res.locals.allReviews = undefined;
+  res.locals.reviewAuthor = undefined;
+  res.locals.message = undefined;
+  if (req.session.userID) {
+    res.locals.session = true;
+    res.locals.userID = req.session.userID;
+    reviews.setAuthorFalse()
+    .then(() => next());
   } else {
-    response.locals.session = false;
-    response.locals.userID = undefined;
-    next();
+    res.locals.session = false;
+    res.locals.userID = undefined;
+    reviews.setAuthorFalse()
+    .then(() => next());
   };
 };
 
-const errorHandler = (error, request, response, next) => {
+const errorHandler = (error, req, res, next) => {
   console.error(error);
-  response.status(500).render('error');
+  res.status(500).render('error', { error });
 };
 
 const notFound = (req, res) => {

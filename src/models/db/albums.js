@@ -5,7 +5,8 @@ const getAll = () => {
 };
 
 const getByID = (albumID) => {
-  return db.query(`SELECT * FROM albums WHERE id = $1`, [albumID]);
+  return db.query(`SELECT * FROM albums WHERE id = $1`, [albumID])
+  .then(album => album[0]);
 };
 
 module.exports = {

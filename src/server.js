@@ -1,9 +1,10 @@
 const path = require('path');
 const express = require('express');
 const bodyParser = require('body-parser');
-const db = require('./db');
 const routes = require('./server/routes');
+const session = require('express-session');
 const middlewares = require('./server/middlewares');
+require('dotenv').config();
 
 const port = process.env.PORT || 3000;
 
@@ -16,6 +17,12 @@ app.set('views', path.join(__dirname, 'views'));
 app.listen(port, () => {
   console.log(`Listening on http://localhost:${port}...`);
 });
+
+app.use(session({
+  secret: process.env.SESSION_SECRET,
+  resave: false,
+  saveUninitialized: false,
+}));
 
 app.use(express.static('public'));
 app.use(bodyParser.urlencoded({extended: false}));

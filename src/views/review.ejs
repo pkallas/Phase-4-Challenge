@@ -1,9 +1,9 @@
 <%- include ./header.ejs %>
 
   <div class="Review-page-container">
-    <h3>New Review For <%= title %></h3>
-    <form action="/albums/<%= id %>/reviews" method="POST">
-      <textarea name="reviewDescription" rows="10" cols="50" placeholder="Write a review..."></textarea>
+    <h3>New Review For <%= album.title %></h3>
+    <form action="/albums/<%= album.id %>/reviews" method="POST">
+      <textarea name="reviewDescription" rows="10" cols="50" placeholder="Write a review..." required></textarea>
       <input type ="Submit" value="Submit">
     </form>
 

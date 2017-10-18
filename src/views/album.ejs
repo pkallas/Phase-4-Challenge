@@ -5,20 +5,20 @@
 
   <div class="album-page-column-head">
     <h2 class="album-page-column-head-left">Reviews</h2>
-    <button type="button" class="album-page-column-head-right">Add Review</button>
+    <a href="/albums/<%= album.id %>/reviews/new"><button type="button" class="album-page-column-head-right">Add Review</button></a>
   </div>
 
   <div class="album-page-column">
-    <% if (reviews) { %>
-      <% reviews.forEach(function(review) { %>
+    <% if (allReviews) { %>
+      <% allReviews.forEach(function(review) { %>
         <div>
           <h5><a href="/albums/<%= review.album_id %>"><%= review.title %></a></h5>
           <span><%= review.date_written %></span>
           <span><%= review.description %></span>
-          <span>by <a href="/users/<% review.user_id %>"><%= review.name %></a></span>
+          <span>by <a href="/users/<%= review.user_id %>"><%= review.name %></a></span>
         </div>
-        <% if (reviewAuthor) { %>
-          <span>&#xe020</span>
+        <% if (review.is_author === true) { %>
+          <i class="fa fa-trash" id="review.id"></i>
         <% } %>
       <% }) %>
     <% } %>
