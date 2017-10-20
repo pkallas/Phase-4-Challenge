@@ -60,7 +60,7 @@ router.post('/albums/:albumID/reviews', (req, res, next) => {
 router.delete('/reviews', (req, res, next) => {
   const reviewID = req.body.reviewID;
   reviews.deleteByID(reviewID)
-  .then(() => res.send(`Review with id ${reviewID} has been deleted.`))
+  .then(() => res.json({ message: `Review with id ${reviewID} has been deleted.` }))
   .catch(error => res.json({
     message: `Review with id ${reviewID} could not be deleted.`,
     error: error,

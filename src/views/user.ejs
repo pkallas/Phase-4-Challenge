@@ -31,9 +31,9 @@
             <h5><a href="/albums/<%= review.album_id %>"><%= review.title %></a></h5>
             <span><%= review.date_written %></span>
             <span><%= review.description %></span>
-            <span>by <a href="/users/<% review.user_id %>"><%= review.name %></a></span>
+            <span>by <a href="/users/<%= review.user_id %>"><%= review.name %></a></span>
             <% if (reviewAuthor) { %>
-              <i class="fa fa-trash" id="<%= review.id %>"></i>
+              <span class="trash-icon" id="<%= review.id %>"><i class="fa fa-trash" id="<%= review.id %>"></i></span>
             <% } %>
           </div>
         <% }) %>

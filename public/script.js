@@ -3,7 +3,7 @@ console.log('hello from the browser JavaScript')
 document.addEventListener('DOMContentLoaded', function () {
   const elements = {
     trashIcon: function () {
-      return document.querySelectorAll('.fa.fa-trash');
+      return document.querySelectorAll('.trash-icon');
     },
     editProfileButton: function () {
       return document.querySelector('.edit-profile-button');
@@ -39,14 +39,14 @@ document.addEventListener('DOMContentLoaded', function () {
     deleteReview: function (reviewIDNumber) {
       fetch('/reviews', {
             method: 'delete',
-            body: JSON.stringify({ reviewID: reviewIDNumber}),
+            body: JSON.stringify({ reviewID: reviewIDNumber }),
             credentials: 'same-origin',
             headers: { 'Content-Type': 'application/json' },
           })
       .then(response => response.json())
       .then(json => {
         if (json.error) {
-          alert(json.error)
+          alert(json.error);
         } else {
           let deletedReview = document.querySelector(`#${reviewIDNumber}`);
           deletedReview.parentElement.remove();
@@ -75,12 +75,12 @@ document.addEventListener('DOMContentLoaded', function () {
 
   const views = {
     openDeleteModal: function () {
-      elements.modalOverlay().display = 'flex';
-      elements.modal().display = 'flex';
+      elements.modalOverlay().style.display = 'flex';
+      elements.modal().style.display = 'flex';
     },
     closeDeleteModal: function () {
-      elements.modalOverlay().display = 'none';
-      elements.modal().display = 'none';
+      elements.modalOverlay().style.display = 'none';
+      elements.modal().style.display = 'none';
     },
     appendInput: function () {
       let newInput = document.createElement('INPUT');
@@ -93,8 +93,8 @@ document.addEventListener('DOMContentLoaded', function () {
       elements.userImageContainer().appendChild(newButton);
     },
     removeInput: function () {
-      elements.profilePicInput.display = 'none';
-      elements.submitProfileForm.display = 'none';
+      elements.profilePicInput.style.display = 'none';
+      elements.submitProfileForm.style.display = 'none';
     },
   };
 

@@ -53,4 +53,5 @@ module.exports = {
   create,
   setAuthorTrue,
   setAuthorFalse,
+  deleteByID,
 };

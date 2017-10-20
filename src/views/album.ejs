@@ -18,7 +18,7 @@
           <span>by <a href="/users/<%= review.user_id %>"><%= review.name %></a></span>
         </div>
         <% if (review.is_author === true) { %>
-          <i class="fa fa-trash" id="review.id"></i>
+          <span class="trash-icon"><i class="fa fa-trash" id="review.id"></i></span>
         <% } %>
       <% }) %>
     <% } %>
